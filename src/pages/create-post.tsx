@@ -4,7 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {db} from "../config/firebase";
 import {addDoc, collection} from "firebase/firestore";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {auth} from "../config/firebase"
+import {auth} from "../config/firebase";
+import { useNavigate } from "react-router-dom";
 interface CreateForm {
     title: string,
     description: string,
@@ -19,7 +20,7 @@ export const CreatePost =()=>{
     })
     const [user]= useAuthState(auth);
     const postRef = collection(db, "posts");
-
+    const navigate = useNavigate();
     const onCreatePost = async (data: CreateForm)=>{
         await addDoc (postRef, {
             title: data.title,
@@ -27,6 +28,7 @@ export const CreatePost =()=>{
             username: user?.displayName,
             userId: user?.uid
         })
+        navigate("/");
     }
 
     return (
