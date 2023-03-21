@@ -5,7 +5,7 @@ import './App.css';
 import { Navbar } from './components/navbar';
 import { Login } from './pages/login';
 import { Main } from './pages/main';
-
+import { CreatePost } from './pages/create-post';
 function App() {
   return (
     <div className="App">
@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/createpost' element={<CreatePost/>}/>
         </Routes>
       </Router>
     </div>

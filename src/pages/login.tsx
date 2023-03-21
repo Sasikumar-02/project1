@@ -10,10 +10,8 @@ export const Login =()=>{
     }
     return (
         <>
-        <h1>Sign in With Google</h1>
-        <button onClick={signInWithGoogle}> Sign in with Google</button>
-        </>
-        
+            <h1>Sign in With Google</h1>
+            <button onClick={signInWithGoogle}> Sign in with Google</button>
+        </>   
     )
-
 }
