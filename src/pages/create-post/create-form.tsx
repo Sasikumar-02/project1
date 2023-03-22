@@ -1,27 +1,27 @@
 import { useForm} from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {db} from "../config/firebase";
+import {db} from "../../config/firebase";
 import {addDoc, collection} from "firebase/firestore";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {auth} from "../config/firebase";
+import {auth} from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
-interface CreateForm {
+interface CreateFormData {
     title: string,
     description: string,
 }
-export const CreatePost =()=>{
+export const CreateForm =()=>{
     const schema = yup.object().shape({
         title: yup.string().required("Title is required"),
         description: yup.string().required("Description is required"),
     })
-    const {register, handleSubmit, formState:{ errors }} = useForm<CreateForm>({
+    const {register, handleSubmit, formState:{ errors }} = useForm<CreateFormData>({
         resolver: yupResolver(schema)
     })
     const [user]= useAuthState(auth);
     const postRef = collection(db, "posts");
     const navigate = useNavigate();
-    const onCreatePost = async (data: CreateForm)=>{
+    const onCreatePost = async (data: CreateFormData)=>{
         await addDoc (postRef, {
             title: data.title,
             description: data.description,
